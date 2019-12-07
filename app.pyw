@@ -116,9 +116,8 @@ def isCollision(x1, y1, x2, y2):
 
 def reset_game():
     screen.fill((0,0,0))
-    global score_value
+    global score_value, num_of_enemies
     score_value = 0
-    global num_of_enemies
     num_of_enemies = 4
     setEnemies()
     mode = 'Stopping at the walls'
@@ -128,14 +127,13 @@ def reset_game():
 
 
 # Game loop
-running = True
-while running:
+while True:
     screen.blit(background, (0, 0))
 
     for event in pygame.event.get():
         pos = pygame.mouse.get_pos()
-        if event.type == pygame.QUIT:
-            running = False
+        if event.type == pygame.QUIT or event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+            sys.QUIT()
 
         # Player controls
         if event.type == pygame.KEYDOWN:
